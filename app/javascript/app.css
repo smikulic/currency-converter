@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+#app-container {
+  margin: auto;
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.col {
+  display: flex;
+  width: 8rem;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.select-currency,
+.input-currency-from,
+.input-currency-to {
+  display: block;
+  margin-top: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  height: 2rem;
+}
