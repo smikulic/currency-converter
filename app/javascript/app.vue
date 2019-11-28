@@ -20,11 +20,15 @@
         exchangeFrom: 'USD',
         exchangeTo: 'USD',
         defaultCurrency: 'USD',
-        availableCurrencies: ['USD', 'EUR', 'NOK', 'HRK', 'GBP', 'RUB', 'AUD', 'CZK', 'INR', 'JPY', 'CNY']
+        availableCurrencies: ['USD', 'EUR', 'NOK', 'HRK', 'GBP', 'RUB', 'AUD', 'CZK', 'INR', 'JPY', 'CNY'],
+        message: 'Select currencies to convert!',
+        isConverted: false,
       }
     },
     methods: {
       calculateCurrencyValue: function () {
+        this.message = 'Waiting while typing or selecting...';
+        this.isConverted = false;
         delayFunctionExecution(this, this.getExchangeRate)
       },
 
@@ -52,7 +56,10 @@
         //   exchangeRate = data;
         // })
         // .then(() => {
-        //   this.calculatedValue = (this.currentValue * exchangeRate).toFixed(6);
+        //   const valueWithExchangeRate = this.currentValue * exchangeRate;
+        //   this.calculatedValue = valueWithExchangeRate.toFixed(6);
+        //   this.message = `${this.currentValue.toFixed(2)} ${this.exchangeFrom} converts to ${valueWithExchangeRate.toFixed(2)} ${this.exchangeTo}`;
+        //   this.isConverted = true;
         // })
       },
   }
@@ -102,6 +109,10 @@
           disabled
         />
       </div>
+    </div>
+
+    <div class="row">
+      <span class="message" v-bind:class="{ messageResult: isConverted }">{{ message }}</span>
     </div>
   </div>
 </template>
