@@ -1,11 +1,20 @@
 <style src="./app.css" scoped></style>
 
 <script>
+  import getFormattedCurrentDate from './utilities/getFormattedCurrentDate.js';
+  import delayFunctionExecution from './utilities/delayFunctionExecution.js';
+  import DatePicker from './components/DatePicker.vue';
+  import SelectCurrency from './components/SelectCurrency.vue';
+
   export default {
-    props: ['data'],
+    name: 'app',
+    components: {
+      DatePicker,
+      SelectCurrency,
+    },
     data: function () {
       return {
-        date: '2019-01-01',
+        date: getFormattedCurrentDate(),
         currentValue: 1,
         calculatedValue: 1,
         exchangeFrom: 'USD',
@@ -16,28 +25,35 @@
     },
     methods: {
       calculateCurrencyValue: function () {
-        if (this.timer) {
-          clearTimeout(this.timer);
-          this.timer = null;
-        }
+        delayFunctionExecution(this, this.getExchangeRate)
+      },
 
-        this.timer = setTimeout(() => {
-            this.getExchangeRate();
-        }, 800);
+      changeSelect: function (selectValue, selectName) {
+        this[selectName] = selectValue;
+        this.calculateCurrencyValue();
+      },
+
+      swapCurrencies: function () {
+        let tempExchangeFrom = this.exchangeFrom;
+        this.exchangeFrom = this.exchangeTo;
+        this.exchangeTo = tempExchangeFrom;
+        this.calculateCurrencyValue();
       },
 
       getExchangeRate: function () {
         const params = `exchangeFrom=${this.exchangeFrom}&exchangeTo=${this.exchangeTo}&date=${this.date}`;
         let exchangeRate = 1;
 
-        //  const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
-        //   .then((resp) => resp.json())
-        //   .then((data) => {
-        //     exchangeRate = data;
-        //   })
-        //   .then(() => {
-        //     this.calculatedValue = (parseInt(this.currentValue, 10) * exchangeRate).toFixed(4);
-        //   })
+        // console.log(params)
+
+        // const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
+        // .then((resp) => resp.json())
+        // .then((data) => {
+        //   exchangeRate = data;
+        // })
+        // .then(() => {
+        //   this.calculatedValue = (this.currentValue * exchangeRate).toFixed(6);
+        // })
       },
   }
 }
@@ -46,49 +62,46 @@
 <template>
   <div id="app-container">
 
-    <div class="col">
-      <select
-        class="select-currency"
-        v-model="exchangeFrom"
-      >
-        <option
-          :selected="currency === defaultCurrency"
-          v-for="currency in availableCurrencies"
-          v-bind:key="currency"
-        >
-          {{ currency }}
-        </option>
-      </select>
-
-      <input
-        class="input-currency-from"
-        type="text"
-        v-model="currentValue"
-        v-on:keyup="calculateCurrencyValue"
-      />
+    <div class="row">
+      <DatePicker v-model="date" @change-date="calculateCurrencyValue" />
     </div>
 
-    <div class="col">
-      <select
-        class="select-currency"
-        v-model="exchangeTo"
-      >
-        <option
-          :selected="currency === defaultCurrency"
-          v-for="currency in availableCurrencies"
-          v-bind:key="currency"
-        >
-          {{ currency }}
-        </option>
-      </select>
-
-      <input
-        class="input-currency-to"
-        type="text"
-        v-model="calculatedValue"
-      />
+    <div class="row">
+      <div class="col">
+        <SelectCurrency
+          name="exchangeFrom"
+          v-bind:value="exchangeFrom"
+          @change-currency="changeSelect"
+          v-bind:defaultCurrency="defaultCurrency"
+          v-bind:availableCurrencies="availableCurrencies"
+        />
+        <input
+          class="input-currency-from"
+          type="text"
+          v-model.number="currentValue"
+          v-on:keyup="calculateCurrencyValue"
+        />
+      </div>
+      <div class="col">
+        <span class="icon-swap" v-on:click="swapCurrencies">
+          <FontAwesomeIcon icon="exchange-alt" />
+        </span>
+      </div>
+      <div class="col">
+        <SelectCurrency
+          name="exchangeTo"
+          v-bind:value="exchangeTo"
+          @change-currency="changeSelect"
+          v-bind:defaultCurrency="defaultCurrency"
+          v-bind:availableCurrencies="availableCurrencies"
+        />
+        <input
+          class="input-currency-to"
+          type="text"
+          v-model.number="calculatedValue"
+          disabled
+        />
+      </div>
     </div>
-
-    <!-- <p>{{ data }}</p> -->
   </div>
 </template>

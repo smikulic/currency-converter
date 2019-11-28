@@ -2,22 +2,22 @@
   box-sizing: border-box;
 }
 
-#app-container {
+.row {
   margin: auto;
   width: 100%;
-  max-width: 24rem;
+  max-width: 30rem;
   display: flex;
   justify-content: space-around;
 }
 
 .col {
+  width: 10rem;
   display: flex;
-  width: 8rem;
   justify-content: space-around;
   flex-direction: column;
+  text-align: center;
 }
 
-.select-currency,
 .input-currency-from,
 .input-currency-to {
   display: block;
@@ -25,4 +25,10 @@
   padding: 0.5rem 0.75rem;
   width: 100%;
   height: 2rem;
+  font-size: 1rem;
+}
+
+.icon-swap {
+  font-size: 1.5rem;
+  cursor: pointer;
 }
