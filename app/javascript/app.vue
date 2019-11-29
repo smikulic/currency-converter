@@ -48,19 +48,17 @@
         const params = `exchangeFrom=${this.exchangeFrom}&exchangeTo=${this.exchangeTo}&date=${this.date}`;
         let exchangeRate = 1;
 
-        // console.log(params)
-
-        // const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
-        // .then((resp) => resp.json())
-        // .then((data) => {
-        //   exchangeRate = data;
-        // })
-        // .then(() => {
-        //   const valueWithExchangeRate = this.currentValue * exchangeRate;
-        //   this.calculatedValue = valueWithExchangeRate.toFixed(6);
-        //   this.message = `${this.currentValue.toFixed(2)} ${this.exchangeFrom} converts to ${valueWithExchangeRate.toFixed(2)} ${this.exchangeTo}`;
-        //   this.isConverted = true;
-        // })
+        const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+          exchangeRate = data;
+        })
+        .then(() => {
+          const valueWithExchangeRate = this.currentValue * exchangeRate;
+          this.calculatedValue = valueWithExchangeRate.toFixed(4);
+          this.message = `${this.currentValue.toFixed(2)} ${this.exchangeFrom} converts to ${valueWithExchangeRate.toFixed(2)} ${this.exchangeTo}`;
+          this.isConverted = true;
+        })
       },
   }
 }
