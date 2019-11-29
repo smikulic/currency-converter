@@ -8,9 +8,7 @@ class HomeController < ApplicationController
     
     # This would usually go into ENV variables or secrets.
     oxr.app_id = 'a52b48990d0a4081b3354e803d5bf633'
-    
     oxr.update_rates
-
     oxr.date = params[:date]
 
     # OpenexchangeratesBank only allows USD as base currency for the free plan users.
@@ -20,7 +18,6 @@ class HomeController < ApplicationController
     oxr.save_rates
 
     Money.default_bank = oxr
-
     @exchange = Money.default_bank.get_rate(params[:exchangeFrom], params[:exchangeTo])
 
     render :json => @exchange

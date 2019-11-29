@@ -9,12 +9,6 @@ Currency conversion app
   - Rails 6.0.1
 
 
-* System dependencies
-
-
-* Configuration
-
-
 * How to run in development
 
   - start webpack with `./bin/webpack-dev-server`
@@ -25,7 +19,7 @@ Currency conversion app
 
 
 * How to run the test suite
-
+  - run `yarn test`
 
 * Deployment instructions
 

@@ -62,8 +62,8 @@
           this.isConverted = true;
         })
       },
+    }
   }
-}
 </script>
 
 <template>
