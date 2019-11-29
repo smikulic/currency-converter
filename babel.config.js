@@ -18,13 +18,22 @@ module.exports = function(api) {
   return {
     presets: [
       isTestEnv && [
-        '@babel/preset-env',
+        // '@babel/env',
+        '@babel/env',
         {
           targets: {
             node: 'current'
           }
         }
       ],
+      // isTestEnv && [
+      //   '@babel/preset-env',
+      //   {
+      //     targets: {
+      //       node: 'current'
+      //     }
+      //   }
+      // ],
       (isProductionEnv || isDevelopmentEnv) && [
         '@babel/preset-env',
         {
