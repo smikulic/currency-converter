@@ -5,12 +5,14 @@
   import delayFunctionExecution from './utilities/delayFunctionExecution.js';
   import DatePicker from './components/DatePicker.vue';
   import SelectCurrency from './components/SelectCurrency.vue';
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
   export default {
     name: 'app',
     components: {
       DatePicker,
       SelectCurrency,
+      FontAwesomeIcon,
     },
     data: function () {
       return {
@@ -44,22 +46,22 @@
         this.calculateCurrencyValue();
       },
 
-      // getExchangeRate: function () {
-      //   const params = `exchangeFrom=${this.exchangeFrom}&exchangeTo=${this.exchangeTo}&date=${this.date}`;
-      //   let exchangeRate = 1;
+      getExchangeRate: function () {
+        const params = `exchangeFrom=${this.exchangeFrom}&exchangeTo=${this.exchangeTo}&date=${this.date}`;
+        let exchangeRate = 1;
 
-      //   const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
-      //   .then((resp) => resp.json())
-      //   .then((data) => {
-      //     exchangeRate = data;
-      //   })
-      //   .then(() => {
-      //     const valueWithExchangeRate = this.currentValue * exchangeRate;
-      //     this.calculatedValue = valueWithExchangeRate.toFixed(4);
-      //     this.message = `${this.currentValue.toFixed(2)} ${this.exchangeFrom} converts to ${valueWithExchangeRate.toFixed(2)} ${this.exchangeTo}`;
-      //     this.isConverted = true;
-      //   })
-      // },
+        const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+          exchangeRate = data;
+        })
+        .then(() => {
+          const valueWithExchangeRate = this.currentValue * exchangeRate;
+          this.calculatedValue = valueWithExchangeRate.toFixed(4);
+          this.message = `${this.currentValue.toFixed(2)} ${this.exchangeFrom} converts to ${valueWithExchangeRate.toFixed(2)} ${this.exchangeTo}`;
+          this.isConverted = true;
+        })
+      },
   }
 }
 </script>

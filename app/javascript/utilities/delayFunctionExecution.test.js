@@ -3,10 +3,18 @@ import delayFunctionExecution from './delayFunctionExecution.js'
 describe("delayFunctionExecution", () => {
   jest.useFakeTimers();
 
-  it("waits 0.8 second before executing the function", () => {
+  it("delays execution of the function", () => {
     let functionMock = jest.fn()
-    let delayedFunction = delayFunctionExecution({}, functionMock)
+    delayFunctionExecution({}, functionMock)
 
-    expect(delayedFunction).toHaveBeenLastCalledWith(expect.any(Function), 800);
+    // At this point in time, the callback should not have been called yet
+    expect(functionMock).not.toBeCalled()
+
+    // Fast-forward until all timers have been executed
+    jest.runAllTimers();
+
+    // Now our callback should have been called!
+    expect(functionMock).toBeCalled()
+    expect(functionMock).toHaveBeenCalledTimes(1)
   });
 });
