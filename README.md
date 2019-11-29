@@ -4,9 +4,9 @@ Currency conversion app
 
 * Ruby & Rails version
 
-- Ruby 2.6.3
+-- Ruby 2.6.3
 
-- Rails 6.0.1
+-- Rails 6.0.1
 
 
 * System dependencies
