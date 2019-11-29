@@ -25,6 +25,11 @@ describe("SelectCurrency.vue with all props", () => {
     expect(wrapper.contains('.select-currency')).toBe(true)
   });
 
+  it("emits change event", () => {
+    wrapper.vm.$emit('change-currency')
+    expect(wrapper.emitted()['change-currency']).toBeTruthy()
+  });
+
   it(`contains ${selectCurrencyPropsMock.availableCurrencies.length} options`, () => {
     expect(wrapper.contains('option')).toBe(true)
     expect(wrapper.findAll('option').length).toBe(selectCurrencyPropsMock.availableCurrencies.length)

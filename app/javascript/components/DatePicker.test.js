@@ -21,14 +21,9 @@ describe("DatePicker.vue with all props", () => {
   it("contains date picker wrapper", () => {
     expect(wrapper.contains('.date-picker')).toBe(true)
   });
-});
 
-describe("DatePicker.vue with no props", () => {
-  const wrapper = shallowMount(DatePicker, {
-    propsData: {},
-  });
-
-  it("renders with no date picker input", () => {
-    expect(wrapper.contains('input')).toBe(false)
+  it("emits change event", () => {
+    wrapper.vm.$emit('change-date')
+    expect(wrapper.emitted()['change-date']).toBeTruthy()
   });
 });
