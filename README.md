@@ -9,6 +9,12 @@ Currency conversion app
 
   - Rails 6.0.1
 
+
+* Initial setup
+
+  - run `rake db:create` & `rake db:migrate` before `rails server`
+
+
  
 * How to run in development
 
