@@ -2,13 +2,14 @@
 
 Currency conversion app
 
+
 * Ruby & Rails version
 
   - Ruby 2.6.3
 
   - Rails 6.0.1
 
-
+ 
 * How to run in development
 
   - start webpack with `./bin/webpack-dev-server`
@@ -19,9 +20,15 @@ Currency conversion app
 
 
 * How to run the test suite
+
   - run `yarn test`
 
+ 
 * Deployment instructions
 
+  - run `git push heroku master`
 
-* ...
+ 
+* Demo & verify in production!
+
+  - open `https://protected-shore-88709.herokuapp.com/` in browser
