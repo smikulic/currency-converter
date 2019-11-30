@@ -11,7 +11,8 @@ Currency conversion app
 
 
 * Initial setup
-
+  - git clone `git@github.com:smikulic/currency-converter.git`
+  - run `bundle install`
   - run `rake db:create` & `rake db:migrate` before `rails server`
 
 
