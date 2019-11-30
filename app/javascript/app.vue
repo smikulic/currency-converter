@@ -50,7 +50,7 @@
         const params = `exchangeFrom=${this.exchangeFrom}&exchangeTo=${this.exchangeTo}&date=${this.date}`;
         let exchangeRate = 1;
 
-        const response = fetch(`http://localhost:3000/home/calculate_exchange?${params}`)
+        const response = fetch(`${window.location.host}/home/calculate_exchange?${params}`)
         .then((resp) => resp.json())
         .then((data) => {
           exchangeRate = data;
